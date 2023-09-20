@@ -13,6 +13,7 @@ class LoginButtonPressed extends LoginEvent {
 
   const LoginButtonPressed({required this.username, required this.password});
   @override
-  // TODO: implement props
   List<Object> get props => [username, password];
 }
+
+class InitialEvent extends LoginEvent {}

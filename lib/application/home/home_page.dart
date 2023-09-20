@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
           BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
               if (state is HomeLoading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state is HomeError) {
@@ -36,10 +36,12 @@ class HomePage extends StatelessWidget {
                   child: ListView.separated(
                       shrinkWrap: true,
                       itemBuilder: (context, index) => ProductCard(
-                          title: state.productlist[index].title,
-                          image: state.productlist[index].image,
-                          description: state.productlist[index].description,
-                          price: state.productlist[index].price.toString()),
+                            title: state.productlist[index].title,
+                            image: state.productlist[index].image,
+                            description: state.productlist[index].description,
+                            price: state.productlist[index].price.toString(),
+                            productid: state.productlist[index].id,
+                          ),
                       separatorBuilder: (context, index) => const SizedBox(
                             height: 10,
                           ),

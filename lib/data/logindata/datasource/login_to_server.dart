@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 abstract class LoginToServer {
-  Future<Loginmodel> getremoteproductdata(String username, password);
+  Future<Loginmodel> getremotelogindata(String username, password);
 }
 
 class LoginToServerimpl implements LoginToServer {
@@ -14,7 +14,7 @@ class LoginToServerimpl implements LoginToServer {
 
   LoginToServerimpl();
   @override
-  Future<Loginmodel> getremoteproductdata(String username, password) async {
+  Future<Loginmodel> getremotelogindata(String username, password) async {
     final body = {"username": username, "password": password};
     log(body.toString());
 

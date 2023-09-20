@@ -20,3 +20,5 @@ class LoginFailureState extends LoginState {
   @override
   List<Object> get props => [error];
 }
+
+class TokenPresentState extends LoginState {}

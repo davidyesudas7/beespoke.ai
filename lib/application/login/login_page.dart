@@ -1,12 +1,15 @@
 import 'package:beespoke_shopping/application/constants_and_colors.dart';
+import 'package:beespoke_shopping/application/home/home_page.dart';
+import 'package:beespoke_shopping/application/login/bloc/login_bloc.dart';
 import 'package:beespoke_shopping/application/login/widgets/login_singnup_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-  static ValueNotifier singnupnotifier = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<LoginBloc>(context).add(InitialEvent());
     return Scaffold(
       backgroundColor: kAppbarcolor,
       body: Padding(
@@ -19,7 +22,26 @@ class LoginPage extends StatelessWidget {
               width: 300,
             ),
             kSpaceheight20,
-            const Loginwidget(),
+            BlocConsumer<LoginBloc, LoginState>(
+              listener: (context, state) {
+                if (state is TokenPresentState) {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ));
+                }
+              },
+              builder: (context, state) {
+                if (state is TokenPresentState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return const Loginwidget();
+                }
+              },
+            ),
           ],
         ),
       ),

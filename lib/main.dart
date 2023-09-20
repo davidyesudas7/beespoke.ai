@@ -1,3 +1,4 @@
+import 'package:beespoke_shopping/application/cart/bloc/cart_bloc.dart';
 import 'package:beespoke_shopping/application/home/bloc/home_bloc.dart';
 import 'package:beespoke_shopping/application/login/bloc/login_bloc.dart';
 import 'package:beespoke_shopping/application/login/login_page.dart';
@@ -25,6 +26,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LoginBloc(),
+        ),
+        BlocProvider(
+          create: (context) => sl<CartBloc>(),
+          child: Container(),
         )
       ],
       child: MaterialApp(

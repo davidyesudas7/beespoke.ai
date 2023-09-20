@@ -1,25 +1,50 @@
+import 'package:beespoke_shopping/application/cart/bloc/cart_bloc.dart';
 import 'package:beespoke_shopping/application/constants_and_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class Cart extends StatelessWidget {
   const Cart({super.key});
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<CartBloc>(context).add(GetcartCartEvent());
     return Scaffold(
         backgroundColor: kBackgroundcolor,
         appBar: AppBar(
           title: const Text('cart'),
           backgroundColor: kAppbarcolor,
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: ListView.separated(
-              itemBuilder: (context, index) => const CartCard(),
-              separatorBuilder: (context, index) => const SizedBox(
-                    height: 10,
-                  ),
-              itemCount: 10),
+        body: BlocBuilder<CartBloc, CartState>(
+          builder: (context, state) {
+            if (state is NewCartAdding) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is CartError) {
+              return Center(
+                child: Text(state.error),
+              );
+            } else if (state is NewcartAdded) {
+              final date =
+                  DateFormat('yyyy-MM-dd').format(state.cartlist.first.date);
+              return Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: ListView.separated(
+                    itemBuilder: (context, index) => CartCard(
+                        quantity: state.cartlist.first.products[index].quantity
+                            .toString(),
+                        date: date),
+                    separatorBuilder: (context, index) => const SizedBox(
+                          height: 10,
+                        ),
+                    itemCount: state.cartlist.first.products.length),
+              );
+            } else {
+              return Container();
+            }
+          },
         ));
   }
 }
@@ -27,8 +52,11 @@ class Cart extends StatelessWidget {
 class CartCard extends StatelessWidget {
   const CartCard({
     super.key,
+    required this.quantity,
+    required this.date,
   });
-
+  final String quantity;
+  final String date;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,10 +79,19 @@ class CartCard extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          const Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('title'), Text('quantity'), Text('amount')],
-          )
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Mens Casual',
+              ),
+              Text(
+                'quantiy: $quantity',
+              ),
+              Text('date:$date')
+            ],
+          ),
         ],
       ),
     );

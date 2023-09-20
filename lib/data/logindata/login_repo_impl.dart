@@ -14,8 +14,7 @@ class LoginRepoimpl implements LoginRepo {
   Future<Either<Failure, LoginEntity>> getlogintoken(
       String username, password) async {
     try {
-      final result =
-          await loginToServer.getremoteproductdata(username, password);
+      final result = await loginToServer.getremotelogindata(username, password);
 
       return right(result);
     } on ServerException catch (_) {

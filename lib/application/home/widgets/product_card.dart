@@ -1,4 +1,8 @@
+import 'package:beespoke_shopping/application/cart/bloc/cart_bloc.dart';
+import 'package:beespoke_shopping/data/cart_data/cart_model.dart';
+import 'package:beespoke_shopping/domain/cart_domain/cartentity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -7,11 +11,13 @@ class ProductCard extends StatelessWidget {
     required this.image,
     required this.description,
     required this.price,
+    required this.productid,
   });
   final String title;
   final String image;
   final String description;
   final String price;
+  final int productid;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +34,7 @@ class ProductCard extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
           ),
           Image.network(
             image,
@@ -37,13 +43,13 @@ class ProductCard extends StatelessWidget {
           ),
           Text(
             '$price rupees',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
           ),
           Expanded(
             child: Text(
               description,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
             ),
@@ -51,7 +57,18 @@ class ProductCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: ElevatedButton(
-                onPressed: () {}, child: const Text('Add To Cart 🛒')),
+                onPressed: () {
+                  BlocProvider.of<CartBloc>(context).add(AddToCartEvent(
+                      cartEntity: CartEntity(
+                          id: productid,
+                          userId: 2,
+                          date: DateTime.now(),
+                          products: [
+                        Product(productId: productid, quantity: 1),
+                        Product(productId: productid, quantity: 1)
+                      ])));
+                },
+                child: const Text('Add To Cart 🛒')),
           )
         ],
       ),

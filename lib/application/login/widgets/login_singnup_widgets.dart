@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:beespoke_shopping/application/constants_and_colors.dart';
 import 'package:beespoke_shopping/application/login/bloc/login_bloc.dart';
 import 'package:beespoke_shopping/application/login/widgets/logpage_button.dart';
-import 'package:beespoke_shopping/application/signup_page.dart';
+import 'package:beespoke_shopping/application/login/signup_page.dart';
 
 // SignUpWidget is a widget for the sign-up form.
 class SignUpWidget extends StatelessWidget {
@@ -80,7 +80,7 @@ class Loginwidget extends StatelessWidget {
         } else if (state is LoginFailureState) {
           // Display an error message to the user in a Snackbar
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Please enter a valid username and password'),
             ),
           );

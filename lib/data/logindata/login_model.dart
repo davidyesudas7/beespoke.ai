@@ -30,6 +30,5 @@ class Loginmodel extends LoginEntity with EquatableMixin {
       };
 
   @override
-  // TODO: implement props
   List<Object?> get props => [token];
 }

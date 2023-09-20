@@ -1,8 +1,8 @@
 // Import necessary dependencies and files
 import 'package:beespoke_shopping/core/failures.dart';
 import 'package:beespoke_shopping/domain/login_domain/login_usecase.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Import event and state classes for the LoginBloc
@@ -16,6 +16,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final Future<SharedPreferences> prfs = SharedPreferences.getInstance();
   // Initialize the LoginBloc with the LoginInitialState
   LoginBloc() : super(LoginInitialState()) {
+    on<InitialEvent>((event, emit) async {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
+      if (token != null) {
+        emit(TokenPresentState());
+      } else {
+        emit(LoginInitialState());
+      }
+    });
     // Define how the bloc should respond to the LoginButtonPressed event
     on<LoginButtonPressed>((event, emit) async {
       // Emit a LoginLoadingState to indicate that login process has started
@@ -23,7 +32,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoadingState());
 
       // Call the getproductdata method from the LoginUseCase
-      final token = await uscase.getproductdata(event.username, event.password);
+      final token = await uscase.getLogindata(event.username, event.password);
 
       // Handle the result of the getproductdata method
       token.fold(

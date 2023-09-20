@@ -8,7 +8,7 @@ class LoginUscase {
   final LoginRepo loginRepo = LoginRepoimpl();
 
   LoginUscase();
-  Future<Either<Failure, LoginEntity>> getproductdata(
+  Future<Either<Failure, LoginEntity>> getLogindata(
       String username, password) async {
     final produtdatalist = loginRepo.getlogintoken(username, password);
     return produtdatalist;

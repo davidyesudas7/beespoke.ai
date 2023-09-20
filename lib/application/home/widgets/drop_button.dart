@@ -1,6 +1,5 @@
 import 'package:beespoke_shopping/application/constants_and_colors.dart';
 import 'package:beespoke_shopping/application/home/bloc/home_bloc.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

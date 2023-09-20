@@ -1,5 +1,6 @@
 import 'package:beespoke_shopping/application/cart/cart_page.dart';
 import 'package:beespoke_shopping/application/constants_and_colors.dart';
+import 'package:beespoke_shopping/application/home/widgets/autocomplete.dart';
 import 'package:beespoke_shopping/application/home/widgets/drop_button.dart';
 import 'package:flutter/material.dart';
 
@@ -37,16 +38,16 @@ class AppBarWidget extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Colors.white, borderRadius: kBorderradius20),
-                child: Center(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: kAppbartextcolor,
-                        )),
-                  ),
-                ),
+                child: const Center(child: AutocompleteBasicExample()
+                    // TextField(
+                    //   decoration: InputDecoration(
+                    //       border: InputBorder.none,
+                    //       prefixIcon: Icon(
+                    //         Icons.search,
+                    //         color: kAppbartextcolor,
+                    //       )),
+                    // ),
+                    ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
