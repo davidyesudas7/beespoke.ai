@@ -60,7 +60,8 @@ class SignUpWidget extends StatelessWidget {
 
 // Loginwidget is a widget for the login form.
 class Loginwidget extends StatelessWidget {
-  const Loginwidget({
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+   Loginwidget({
     super.key,
   });
 
@@ -87,57 +88,61 @@ class Loginwidget extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Column(
-          children: [
-            // Username input field
-            TextFormField(
-              controller: usernamecontroler,
-              decoration: InputDecoration(
-                hintText: 'User Name',
-                filled: true,
-                fillColor: kWhitecolor,
-                border: kOutlineborder,
+        return Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              // Username input field
+              TextFormField(
+                controller: usernamecontroler,
+                decoration: InputDecoration(
+                  hintText: 'User Name',
+                  filled: true,
+                  fillColor: kWhitecolor,
+                  border: kOutlineborder,
+                ),
               ),
-            ),
-            kSpaceheight10,
-            // Password input field
-            TextFormField(
-              controller: passwordcontroler,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                filled: true,
-                fillColor: kWhitecolor,
-                border: kOutlineborder,
+              kSpaceheight10,
+              // Password input field
+              TextFormField(
+                controller: passwordcontroler,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  filled: true,
+                  fillColor: kWhitecolor,
+                  border: kOutlineborder,
+                  
+                ),
               ),
-            ),
-            kSpaceheight20,
-            // Login Button
-            LogPageButton(
-              ontap: () {
-                // Dispatch a LoginButtonPressed event to the LoginBloc
-
-                BlocProvider.of<LoginBloc>(context).add(LoginButtonPressed(
-                    username: usernamecontroler.text,
-                    password: passwordcontroler.text));
-              },
-              name: 'Login',
-            ),
-            // Sign Up button
-            TextButton(
-              onPressed: () {
-                // Navigate to the Sign-Up Page
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignupPage(),
-                    ));
-              },
-              child: Text(
-                'Sign Up',
-                style: TextStyle(fontSize: 20, color: kBluecolor800),
+              kSpaceheight20,
+              // Login Button
+              LogPageButton(
+                ontap: () {
+                  // Dispatch a LoginButtonPressed event to the LoginBloc
+        
+                  BlocProvider.of<LoginBloc>(context).add(LoginButtonPressed(
+                      username: usernamecontroler.text,
+                      password: passwordcontroler.text));
+                },
+                name: 'Login',
               ),
-            ),
-          ],
+              // Sign Up button
+              TextButton(
+                onPressed: () {
+                  // Navigate to the Sign-Up Page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignupPage(),
+                      ));
+                },
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(fontSize: 20, color: kBluecolor800),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
