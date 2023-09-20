@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:beespoke_shopping/core/exceptions.dart';
@@ -19,8 +20,14 @@ class NewCartRemoteDataimpl implements NewcartRemoteData {
   @override
   Future<List<Cartmodel>> addcartoremotedata(CartEntity cartEntity) async {
     log(cartEntity.toJson().toString());
-    final response =
-        await client.post(Uri.parse(addnewcarturl), body: cartEntity.toJson());
+    final response = await client.post(
+      Uri.parse(addnewcarturl),
+      body: jsonEncode(cartEntity.toJson()),
+      headers: {
+        'content-type': 'application/json',
+      },
+    );
+    log(response.body);
 
     if (response.statusCode != 200) {
       debugPrint(response.statusCode.toString());

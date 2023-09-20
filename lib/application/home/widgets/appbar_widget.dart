@@ -32,22 +32,15 @@ class AppBarWidget extends StatelessWidget {
                   'assets/images/beespoke_logo.png',
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 40),
-                height: 40,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: kBorderradius20),
-                child: const Center(child: AutocompleteBasicExample()
-                    // TextField(
-                    //   decoration: InputDecoration(
-                    //       border: InputBorder.none,
-                    //       prefixIcon: Icon(
-                    //         Icons.search,
-                    //         color: kAppbartextcolor,
-                    //       )),
-                    // ),
-                    ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
+                  height: 40,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.white, borderRadius: kBorderradius20),
+                  child: const Center(child: AutocompleteSearch()),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

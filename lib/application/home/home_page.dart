@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
                 );
               } else if (state is HomeLoaded) {
                 return Expanded(
+                  flex: 3,
                   child: ListView.separated(
                       shrinkWrap: true,
                       itemBuilder: (context, index) => ProductCard(

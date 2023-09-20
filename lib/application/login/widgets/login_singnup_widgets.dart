@@ -80,7 +80,7 @@ class Loginwidget extends StatelessWidget {
         } else if (state is LoginFailureState) {
           // Display an error message to the user in a Snackbar
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('Please enter a valid username and password'),
             ),
           );

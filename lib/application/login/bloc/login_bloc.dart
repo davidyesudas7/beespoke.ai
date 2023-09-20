@@ -30,7 +30,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       // Emit a LoginLoadingState to indicate that login process has started
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       emit(LoginLoadingState());
-
       // Call the getproductdata method from the LoginUseCase
       final token = await uscase.getLogindata(event.username, event.password);
 

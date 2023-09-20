@@ -22,7 +22,6 @@ class CartRepoimpl implements CartRepo {
     } on ServerException catch (_) {
       return left(ServerFailure());
     } catch (e) {
-      log(e.toString());
       return left(GeneralaFailure());
     }
   }

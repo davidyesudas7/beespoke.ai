@@ -1,12 +1,15 @@
+import 'package:beespoke_shopping/application/home/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AutocompleteBasicExample extends StatelessWidget {
-  const AutocompleteBasicExample({super.key});
+class AutocompleteSearch extends StatelessWidget {
+  const AutocompleteSearch({super.key});
 
   static const List<String> _kOptions = <String>[
-    'aardvark',
-    'bobcat',
-    'chameleon',
+    "electronics",
+    "jewelery",
+    "men's clothing",
+    "women's clothing"
   ];
 
   @override
@@ -21,6 +24,8 @@ class AutocompleteBasicExample extends StatelessWidget {
         });
       },
       onSelected: (String selection) {
+        BlocProvider.of<HomeBloc>(context)
+            .add(SpecificCategoryEvent(selectedcategory: selection));
         debugPrint('You just selected $selection');
       },
     );

@@ -18,7 +18,10 @@ class LoginToServerimpl implements LoginToServer {
     final body = {"username": username, "password": password};
     log(body.toString());
 
-    final response = await client.post(Uri.parse(loginurl), body: body);
+    final response = await client.post(
+      Uri.parse(loginurl),
+      body: body,
+    );
     debugPrint(response.body);
 
     if (response.statusCode != 200) {
