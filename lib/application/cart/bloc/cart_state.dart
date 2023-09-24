@@ -11,13 +11,15 @@ final class CartInitial extends CartState {}
 
 final class NewCartAdding extends CartState {}
 
-final class NewcartAdded extends CartState {
-  final List<CartEntity> cartlist;
+final class Cartloaded extends CartState {
+  final CartEntity cartlist;
 
-  const NewcartAdded({required this.cartlist});
+  const Cartloaded({required this.cartlist});
   @override
   List<Object> get props => [cartlist];
 }
+
+final class NewCartAdded extends CartState {}
 
 final class CartError extends CartState {
   final String error;

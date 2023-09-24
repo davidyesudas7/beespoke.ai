@@ -54,21 +54,34 @@ class ProductCard extends StatelessWidget {
               maxLines: 3,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: ElevatedButton(
-                onPressed: () {
-                  BlocProvider.of<CartBloc>(context).add(AddToCartEvent(
-                      cartEntity: CartEntity(
-                          id: productid,
-                          userId: 2,
-                          date: DateTime.now(),
-                          products: [
-                        Product(productId: productid, quantity: 1),
-                        Product(productId: productid, quantity: 1)
-                      ])));
-                },
-                child: const Text('Add To Cart 🛒')),
+          BlocConsumer<CartBloc, CartState>(
+            listener: (context, state) {
+              if (state is CartError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.error),
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: ElevatedButton(
+                    onPressed: () {
+                      BlocProvider.of<CartBloc>(context).add(AddToCartEvent(
+                          cartEntity: CartEntity(
+                              id: productid,
+                              userId: 2,
+                              date: DateTime.now(),
+                              products: [
+                            Product(productId: productid, quantity: 1),
+                            Product(productId: productid, quantity: 1)
+                          ])));
+                    },
+                    child: const Text('Add To Cart 🛒')),
+              );
+            },
           )
         ],
       ),

@@ -26,20 +26,19 @@ class Cart extends StatelessWidget {
               return Center(
                 child: Text(state.error),
               );
-            } else if (state is NewcartAdded) {
-              final date =
-                  DateFormat('yyyy-MM-dd').format(state.cartlist.first.date);
+            } else if (state is Cartloaded) {
+              final date = DateFormat('yyyy-MM-dd').format(state.cartlist.date);
               return Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: ListView.separated(
                     itemBuilder: (context, index) => CartCard(
-                        quantity: state.cartlist.first.products[index].quantity
-                            .toString(),
+                        quantity:
+                            state.cartlist.products[index].quantity.toString(),
                         date: date),
                     separatorBuilder: (context, index) => const SizedBox(
                           height: 10,
                         ),
-                    itemCount: state.cartlist.first.products.length),
+                    itemCount: state.cartlist.products.length),
               );
             } else {
               return Container();

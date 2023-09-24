@@ -27,7 +27,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         // Handle the case where there's a failure
         (failure) => emit(CartError(error: _mapfailure(failure))),
         // Handle the case where data was added successfully
-        (catdata) => emit(NewcartAdded(cartlist: catdata)),
+        (catdata) => emit(NewCartAdded()),
       );
     });
 
@@ -41,7 +41,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         // Handle the case where there's a failure
         (failure) => emit(CartError(error: _mapfailure(failure))),
         // Handle the case where cart data was retrieved successfully
-        (cartlist) => emit(NewcartAdded(cartlist: cartlist)),
+        (cartlist) => emit(Cartloaded(cartlist: cartlist)),
       );
     });
   }
@@ -60,4 +60,3 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 }
-

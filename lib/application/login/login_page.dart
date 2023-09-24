@@ -25,6 +25,11 @@ class LoginPage extends StatelessWidget {
             BlocConsumer<LoginBloc, LoginState>(
               listener: (context, state) {
                 if (state is TokenPresentState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('login sucsess full'),
+                    ),
+                  );
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

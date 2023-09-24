@@ -1,4 +1,4 @@
-
+import 'dart:developer';
 
 import 'package:beespoke_shopping/core/exceptions.dart';
 import 'package:beespoke_shopping/core/failures.dart';
@@ -13,8 +13,7 @@ class CartRepoimpl implements CartRepo {
 
   CartRepoimpl({required this.newcartRemoteData});
   @override
-  Future<Either<Failure, List<CartEntity>>> addnewcart(
-      CartEntity cartEntity) async {
+  Future<Either<Failure, CartEntity>> addnewcart(CartEntity cartEntity) async {
     try {
       final result = await newcartRemoteData.addcartoremotedata(cartEntity);
 
@@ -22,12 +21,13 @@ class CartRepoimpl implements CartRepo {
     } on ServerException catch (_) {
       return left(ServerFailure());
     } catch (e) {
+      log(e.toString());
       return left(GeneralaFailure());
     }
   }
 
   @override
-  Future<Either<Failure, List<CartEntity>>> getnewcart() async {
+  Future<Either<Failure, CartEntity>> getnewcart() async {
     try {
       final result = await newcartRemoteData.getcartoremotedata();
 

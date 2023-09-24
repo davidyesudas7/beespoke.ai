@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 abstract class NewcartRemoteData {
-  Future<List<Cartmodel>> addcartoremotedata(CartEntity cartEntity);
-  Future<List<Cartmodel>> getcartoremotedata();
+  Future<Cartmodel> addcartoremotedata(CartEntity cartEntity);
+  Future<Cartmodel> getcartoremotedata();
 }
 
 class NewCartRemoteDataimpl implements NewcartRemoteData {
@@ -18,7 +18,7 @@ class NewCartRemoteDataimpl implements NewcartRemoteData {
 
   NewCartRemoteDataimpl({required this.client});
   @override
-  Future<List<Cartmodel>> addcartoremotedata(CartEntity cartEntity) async {
+  Future<Cartmodel> addcartoremotedata(CartEntity cartEntity) async {
     log(cartEntity.toJson().toString());
     final response = await client.post(
       Uri.parse(addnewcarturl),
@@ -35,12 +35,12 @@ class NewCartRemoteDataimpl implements NewcartRemoteData {
     } else {
       final loginmodel = cartmodelFromJson(response.body);
 
-      return loginmodel;
+      return loginmodel.first;
     }
   }
 
   @override
-  Future<List<Cartmodel>> getcartoremotedata() async {
+  Future<Cartmodel> getcartoremotedata() async {
     final response = await client.get(
       Uri.parse('$getcarturl/2'),
     );
@@ -53,7 +53,7 @@ class NewCartRemoteDataimpl implements NewcartRemoteData {
     } else {
       final loginmodel = cartmodelFromJson(response.body);
 
-      return loginmodel;
+      return loginmodel.first;
     }
   }
 }

@@ -61,7 +61,7 @@ class SignUpWidget extends StatelessWidget {
 // Loginwidget is a widget for the login form.
 class Loginwidget extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-   Loginwidget({
+  Loginwidget({
     super.key,
   });
 
@@ -81,7 +81,7 @@ class Loginwidget extends StatelessWidget {
         } else if (state is LoginFailureState) {
           // Display an error message to the user in a Snackbar
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Please enter a valid username and password'),
             ),
           );
@@ -111,7 +111,6 @@ class Loginwidget extends StatelessWidget {
                   filled: true,
                   fillColor: kWhitecolor,
                   border: kOutlineborder,
-                  
                 ),
               ),
               kSpaceheight20,
@@ -119,10 +118,10 @@ class Loginwidget extends StatelessWidget {
               LogPageButton(
                 ontap: () {
                   // Dispatch a LoginButtonPressed event to the LoginBloc
-        
+
                   BlocProvider.of<LoginBloc>(context).add(LoginButtonPressed(
-                      username: usernamecontroler.text,
-                      password: passwordcontroler.text));
+                      username: usernamecontroler.text.trim(),
+                      password: passwordcontroler.text.trim()));
                 },
                 name: 'Login',
               ),
