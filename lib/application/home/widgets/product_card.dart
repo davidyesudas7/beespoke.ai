@@ -62,6 +62,12 @@ class ProductCard extends StatelessWidget {
                     content: Text(state.error),
                   ),
                 );
+              } else if (state is CartAddedState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.cartadded),
+                  ),
+                );
               }
             },
             builder: (context, state) {

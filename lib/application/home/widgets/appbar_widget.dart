@@ -15,7 +15,7 @@ class AppBarWidget extends StatelessWidget {
         width: double.infinity,
         height: 170,
         decoration: BoxDecoration(
-          color: kAppbarcolor,
+          color: Colors.blue,
           borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(20),
             bottomRight: Radius.circular(20),

@@ -13,7 +13,7 @@ class CartRepoimpl implements CartRepo {
 
   CartRepoimpl({required this.newcartRemoteData});
   @override
-  Future<Either<Failure, CartEntity>> addnewcart(CartEntity cartEntity) async {
+  Future<Either<Failure, String>> addnewcart(CartEntity cartEntity) async {
     try {
       final result = await newcartRemoteData.addcartoremotedata(cartEntity);
 

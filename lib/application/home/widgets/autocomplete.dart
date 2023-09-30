@@ -1,16 +1,12 @@
 import 'package:beespoke_shopping/application/home/bloc/home_bloc.dart';
+import 'package:beespoke_shopping/application/home/widgets/autocomplete_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AutocompleteSearch extends StatelessWidget {
   const AutocompleteSearch({super.key});
 
-  static const List<String> _kOptions = <String>[
-    "electronics",
-    "jewelery",
-    "men's clothing",
-    "women's clothing"
-  ];
+  static final List<String> _kOptions = autolist;
 
   @override
   Widget build(BuildContext context) {

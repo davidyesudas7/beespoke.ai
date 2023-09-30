@@ -20,6 +20,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     // Handle the AddToCartEvent
     on<AddToCartEvent>((event, emit) async {
       // Call the 'addnewcartdata' method from 'cartUsecase' and await its result
+      emit(NewCartAdding());
       final addtocart = await cartUsecase.addnewcartdata(event.cartEntity);
 
       // Use 'fold' to handle either a Failure or a successful result
@@ -27,7 +28,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         // Handle the case where there's a failure
         (failure) => emit(CartError(error: _mapfailure(failure))),
         // Handle the case where data was added successfully
-        (catdata) => emit(NewCartAdded()),
+        (catdata) => emit(CartAddedState(cartadded: catdata)),
       );
     });
 

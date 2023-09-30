@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final _scaffoldkey = GlobalKey<ScaffoldMessengerState>();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        scaffoldMessengerKey: _scaffoldkey,
         title: 'BeepSpoke Shopping',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple.shade200),

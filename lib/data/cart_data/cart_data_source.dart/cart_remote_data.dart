@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 abstract class NewcartRemoteData {
-  Future<Cartmodel> addcartoremotedata(CartEntity cartEntity);
+  Future<String> addcartoremotedata(CartEntity cartEntity);
   Future<Cartmodel> getcartoremotedata();
 }
 
@@ -18,7 +18,7 @@ class NewCartRemoteDataimpl implements NewcartRemoteData {
 
   NewCartRemoteDataimpl({required this.client});
   @override
-  Future<Cartmodel> addcartoremotedata(CartEntity cartEntity) async {
+  Future<String> addcartoremotedata(CartEntity cartEntity) async {
     log(cartEntity.toJson().toString());
     final response = await client.post(
       Uri.parse(addnewcarturl),
@@ -33,9 +33,7 @@ class NewCartRemoteDataimpl implements NewcartRemoteData {
       debugPrint(response.statusCode.toString());
       throw ServerException();
     } else {
-      final loginmodel = cartmodelFromJson(response.body);
-
-      return loginmodel.first;
+      return 'product is added to cart';
     }
   }
 

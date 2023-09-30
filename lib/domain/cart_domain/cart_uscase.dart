@@ -7,8 +7,7 @@ class CartUsecase {
   final CartRepo cartRepo;
 
   CartUsecase({required this.cartRepo});
-  Future<Either<Failure, CartEntity>> addnewcartdata(
-      CartEntity cartEntity) async {
+  Future<Either<Failure, String>> addnewcartdata(CartEntity cartEntity) async {
     final produtdatalist = cartRepo.addnewcart(cartEntity);
     return produtdatalist;
   }
